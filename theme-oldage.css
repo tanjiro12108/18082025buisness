@@ -1,0 +1,33 @@
+body {
+  font-family: 'Georgia', serif;
+  background: #e6dace url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  color: #4a3c1a;
+  margin: 0;
+}
+header {
+  background: #f3eac2;
+  border-bottom: 2px solid #d2ba7e;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.content-card {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #faf2d3;
+  border-radius: 9px;
+  box-shadow: 0 4px 16px #bca56c55;
+  padding: 32px;
+  border: 1px solid #e5d8a1;
+}
+.main-btn {
+  background: #d2ba7e;
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 0px;
+  font-size: 1rem;
+  font-family: 'Georgia', serif;
+  cursor: pointer;
+}
