@@ -1,0 +1,39 @@
+body {
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  background: linear-gradient(120deg, #1a1a40 0%, #2dffe6 100%);
+  color: #fff;
+  margin: 0;
+}
+header {
+  background: transparent;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #2dffe6;
+}
+.content-card {
+  max-width: 600px;
+  margin: 40px auto;
+  background: rgba(20, 20, 60, 0.88);
+  border-radius: 32px;
+  box-shadow: 0 8px 24px #2dffe644;
+  padding: 32px;
+  border: 1px solid #2dffe6;
+  transition: transform 0.2s;
+}
+.content-card:hover {
+  transform: scale(1.03) rotate(-1deg);
+}
+.main-btn {
+  background: linear-gradient(90deg, #2dffe6 0%, #ff2df1 100%);
+  color: #1a1a40;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 32px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 20px #ff2df188;
+  text-transform: uppercase;
+}
