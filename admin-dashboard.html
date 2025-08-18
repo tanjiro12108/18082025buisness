@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --primary: #3f51b5;
+      --primary-dark: #283593;
+      --accent: #ff4081;
+      --bg: #f4f6f8;
+      --sidebar-bg: #232946;
+      --sidebar-active: #eebbc3;
+      --text: #232946;
+      --white: #fff;
+      --card-bg: #fff;
+      --shadow: 0 4px 16px rgba(60,60,60,0.06);
+      --radius: 1rem;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+    }
+    .sidebar {
+      width: 240px;
+      background: var(--sidebar-bg);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      z-index: 10;
+      padding-top: 2rem;
+      min-height: 100vh;
+      box-shadow: 2px 0 8px #0002;
+    }
+    .sidebar h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 0 2rem 2rem;
+      color: var(--sidebar-active);
+      letter-spacing: 2px;
+    }
+    .sidebar nav {
+      width: 100%;
+    }
+    .sidebar nav a {
+      display: block;
+      width: 100%;
+      padding: 1rem 2rem;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.08rem;
+      letter-spacing: 1px;
+      border-left: 4px solid transparent;
+      transition: background 0.2s, border 0.2s;
+    }
+    .sidebar nav a.active,
+    .sidebar nav a:hover {
+      background: #353570;
+      border-left: 4px solid var(--sidebar-active);
+      color: var(--sidebar-active);
+    }
+    .main-content {
+      margin-left: 240px;
+      padding: 2.5rem 2rem 2rem 2rem;
+      width: 100%;
+      min-height: 100vh;
+      box-sizing: border-box;
+      background: var(--bg);
+    }
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.2rem;
+    }
+    .dashboard-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .user-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 10px #ff408144;
+    }
+    .user-name {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+    .cards-row {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .card {
+      flex: 1;
+      min-width: 220px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem 1.5rem 1.3rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+    }
+    .card .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #787a91;
+      margin-bottom: 0.7rem;
+    }
+    .card .card-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.7rem;
+    }
+    .card .card-desc {
+      font-size: 0.95rem;
+      color: #aaa;
+    }
+    .card-icon {
+      position: absolute;
+      top: 1.3rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      opacity: 0.13;
+    }
+    .section-title {
+      font-size: 1.25rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+    }
+    .table-container {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.2rem 1rem 1.3rem 1rem;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+      background: transparent;
+    }
+    th, td {
+      padding: 0.9rem 0.7rem;
+      text-align: left;
+      border-bottom: 1px solid #ececec;
+    }
+    th {
+      background: #f6f8fc;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .status {
+      padding: 0.3rem 1rem;
+      border-radius: 12px;
+      font-size: 0.97rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+    .status.active { background: #e4ffe7; color: #269966; }
+    .status.pending { background: #fffbe6; color: #ff9800; }
+    .status.blocked { background: #ffe6e6; color: #e53935; }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .cards-row { flex-direction: column; gap: 1rem; }
+      .main-content { padding: 1.2rem 0.5rem; }
+    }
+    @media (max-width: 650px) {
+      .sidebar { position: static; width: 100%; flex-direction: row; min-height: auto; padding: 0.5rem 0;}
+      .sidebar h2 { display: none; }
+      .sidebar nav { display: flex; width: 100%; }
+      .sidebar nav a { padding: 0.9rem 1rem; font-size: 0.98rem;}
+      .main-content { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>ADMIN</h2>
+    <nav>
+      <a href="#" class="active">Dashboard</a>
+      <a href="#">Users</a>
+      <a href="#">Analytics</a>
+      <a href="#">Settings</a>
+      <a href="#">Logout</a>
+    </nav>
+  </aside>
+  <div class="main-content">
+    <div class="dashboard-header">
+      <h1>Dashboard</h1>
+      <div class="user-info">
+        <span class="user-avatar">AD</span>
+        <span class="user-name">Admin</span>
+      </div>
+    </div>
+    <div class="cards-row">
+      <div class="card">
+        <div class="card-title">Total Users</div>
+        <div class="card-value">1,245</div>
+        <div class="card-desc">Active this month</div>
+        <span class="card-icon">👥</span>
+      </div>
+      <div class="card">
+        <div class="card-title">New Signups</div>
+        <div class="card-value">92</div>
+        <div class="card-desc">This week</div>
+        <span class="card-icon">📝</span>
+      </div>
+      <div class="card">
+        <div class="card-title">Active Sessions</div>
+        <div class="card-value">37</div>
+        <div class="card-desc">Right now</div>
+        <span class="card-icon">⚡</span>
+      </div>
+      <div class="card">
+        <div class="card-title">Revenue</div>
+        <div class="card-value">$6,810</div>
+        <div class="card-desc">This month</div>
+        <span class="card-icon">💰</span>
+      </div>
+    </div>
+    <div class="section-title">Recent Users</div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Signup Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tanjiro Kamado</td>
+            <td>tanjiro@example.com</td>
+            <td>2025-08-17</td>
+            <td><span class="status active">Active</span></td>
+          </tr>
+          <tr>
+            <td>Nezuko Kamado</td>
+            <td>nezuko@example.com</td>
+            <td>2025-08-16</td>
+            <td><span class="status pending">Pending</span></td>
+          </tr>
+          <tr>
+            <td>Inosuke Hashibira</td>
+            <td>inosuke@example.com</td>
+            <td>2025-08-15</td>
+            <td><span class="status blocked">Blocked</span></td>
+          </tr>
+          <tr>
+            <td>Zenitsu Agatsuma</td>
+            <td>zenitsu@example.com</td>
+            <td>2025-08-14</td>
+            <td><span class="status active">Active</span></td>
+          </tr>
+          <tr>
+            <td>Kanao Tsuyuri</td>
+            <td>kanao@example.com</td>
+            <td>2025-08-13</td>
+            <td><span class="status active">Active</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
