@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings - Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- (Copy your dashboard CSS here) -->
+  <style>
+    /* ...[same CSS as dashboard file]... */
+  </style>
+</head>
+<body class="theme-basic">
+  <aside class="sidebar">
+    <h2>ADMIN</h2>
+    <nav>
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-analytics.html">Analytics</a>
+      <a href="admin-settings.html" class="active">Settings</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </aside>
+  <div class="main-content">
+    <div class="dashboard-header">
+      <h1>Settings</h1>
+      <div style="display: flex; align-items: center;">
+        <select class="theme-switcher" id="themeSwitcher" title="Change Theme">
+          <option value="basic">Basic</option>
+          <option value="genz">GenZ</option>
+          <option value="millennial">Millennial</option>
+          <option value="oldage">Old Age</option>
+          <option value="under18">Under 18</option>
+        </select>
+        <div class="user-info">
+          <span class="user-avatar">AD</span>
+          <span class="user-name">Admin</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-title">Admin Settings</div>
+      <div class="card">
+        <div class="card-title">Change Password</div>
+        <form>
+          <input type="password" placeholder="Current Password" style="display:block; margin-bottom:1rem; width:100%; padding:0.7rem 1rem; border-radius:0.5rem; border:1px solid #ccc;">
+          <input type="password" placeholder="New Password" style="display:block; margin-bottom:1rem; width:100%; padding:0.7rem 1rem; border-radius:0.5rem; border:1px solid #ccc;">
+          <input type="password" placeholder="Confirm New Password" style="display:block; margin-bottom:1rem; width:100%; padding:0.7rem 1rem; border-radius:0.5rem; border:1px solid #ccc;">
+          <button type="submit" style="padding:0.7rem 2rem; border-radius:0.5rem; background:#3f51b5; color:#fff; border:none; font-weight:600;">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    // (Copy the JS from your dashboard file here)
+    const themeMap = {
+      basic: 'theme-basic',
+      genz: 'theme-genz',
+      millennial: 'theme-millennial',
+      oldage: 'theme-oldage',
+      under18: 'theme-under18'
+    };
+    const body = document.body;
+    const themeSwitcher = document.getElementById('themeSwitcher');
+
+    function setTheme(themeKey) {
+      Object.values(themeMap).forEach(cls => body.classList.remove(cls));
+      body.classList.add(themeMap[themeKey]);
+      localStorage.setItem('dashboardTheme', themeKey);
+      themeSwitcher.value = themeKey;
+    }
+
+    themeSwitcher.addEventListener('change', function() {
+      setTheme(this.value);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('dashboardTheme') || 'basic';
+      setTheme(savedTheme);
+    });
+  </script>
+</body>
+</html>
