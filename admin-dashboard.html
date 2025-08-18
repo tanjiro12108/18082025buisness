@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Dashboard</title>
+  <title>Admin Dashboard with Theme Management</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
@@ -25,6 +25,7 @@
       color: var(--text);
       min-height: 100vh;
       display: flex;
+      transition: background 0.5s, color 0.5s;
     }
     .sidebar {
       width: 240px;
@@ -59,13 +60,19 @@
       font-size: 1.08rem;
       letter-spacing: 1px;
       border-left: 4px solid transparent;
-      transition: background 0.2s, border 0.2s;
+      transition: background 0.2s, border 0.2s, color 0.2s;
+      background: none;
+      position: relative;
+      z-index: 1;
+      /* Repair: Remove any overflow or pseudo-element backgrounds */
+      box-sizing: border-box;
     }
     .sidebar nav a.active,
     .sidebar nav a:hover {
-      background: #353570;
+      background: rgba(255,255,255,0.08);
       border-left: 4px solid var(--sidebar-active);
       color: var(--sidebar-active);
+      box-shadow: none;
     }
     .main-content {
       margin-left: 240px;
@@ -74,6 +81,7 @@
       min-height: 100vh;
       box-sizing: border-box;
       background: var(--bg);
+      transition: background 0.5s, color 0.5s;
     }
     .dashboard-header {
       display: flex;
@@ -128,6 +136,7 @@
       flex-direction: column;
       align-items: flex-start;
       position: relative;
+      transition: background 0.5s, color 0.5s;
     }
     .card .card-title {
       font-size: 1rem;
@@ -165,6 +174,7 @@
       box-shadow: var(--shadow);
       padding: 1.2rem 1rem 1.3rem 1rem;
       overflow-x: auto;
+      transition: background 0.5s, color 0.5s;
     }
     table {
       width: 100%;
@@ -195,6 +205,124 @@
     .status.active { background: #e4ffe7; color: #269966; }
     .status.pending { background: #fffbe6; color: #ff9800; }
     .status.blocked { background: #ffe6e6; color: #e53935; }
+    /* ------ THEME CLASSES --------- */
+    /* GenZ Theme */
+    .theme-genz {
+      --primary: #56ffc5;
+      --primary-dark: #0f2027;
+      --accent: #ff3cac;
+      --bg: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+      --sidebar-bg: rgba(20,20,32,0.85);
+      --sidebar-active: #56ffc5;
+      --text: #fff;
+      --white: #fff;
+      --card-bg: rgba(40, 40, 80, 0.75);
+      --shadow: 0 12px 32px #56ffc544;
+    }
+    .theme-genz .dashboard-header h1,
+    .theme-genz .section-title {
+      background: linear-gradient(90deg, #56ffc5 40%, #ff3cac 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: unset;
+    }
+    .theme-genz .sidebar h2 {
+      color: #ff3cac;
+    }
+    .theme-genz .card-value {
+      color: #ff3cac;
+    }
+    /* Millennial Theme */
+    .theme-millennial {
+      --primary: #ffb347;
+      --primary-dark: #f7c873;
+      --accent: #ffa99f;
+      --bg: linear-gradient(135deg, #ffe29f 0%, #ffa99f 100%);
+      --sidebar-bg: #fffbe7;
+      --sidebar-active: #ffb347;
+      --text: #2b2b2b;
+      --white: #fff;
+      --card-bg: #fffde7;
+      --shadow: 0 6px 20px #f7c87388;
+    }
+    .theme-millennial .dashboard-header h1,
+    .theme-millennial .section-title {
+      color: #ffb347;
+      background: none;
+      -webkit-text-fill-color: unset;
+    }
+    .theme-millennial .sidebar h2 {
+      color: #ffb347;
+    }
+    .theme-millennial .card-value {
+      color: #ffa99f;
+    }
+    /* Old Age Theme */
+    .theme-oldage {
+      --primary: #bca56c;
+      --primary-dark: #4a3c1a;
+      --accent: #d2ba7e;
+      --bg: #e6dace url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+      --sidebar-bg: #f3eac2;
+      --sidebar-active: #bca56c;
+      --text: #4a3c1a;
+      --white: #faf2d3;
+      --card-bg: #faf2d3;
+      --shadow: 0 4px 16px #bca56c55;
+    }
+    .theme-oldage .dashboard-header h1,
+    .theme-oldage .section-title {
+      color: #bca56c;
+      background: none;
+      -webkit-text-fill-color: unset;
+    }
+    .theme-oldage .sidebar h2 {
+      color: #bca56c;
+    }
+    .theme-oldage .card-value {
+      color: #bca56c;
+    }
+    /* Under 18 Theme */
+    .theme-under18 {
+      --primary: #fcb69f;
+      --primary-dark: #355c7d;
+      --accent: #ffb347;
+      --bg: linear-gradient(120deg, #ffecd2 0%, #fcb69f 100%);
+      --sidebar-bg: #fff5e6;
+      --sidebar-active: #ffb347;
+      --text: #355c7d;
+      --white: #fffbe7;
+      --card-bg: #fffbe7;
+      --shadow: 0 8px 24px #ffb34744;
+    }
+    .theme-under18 .dashboard-header h1,
+    .theme-under18 .section-title {
+      color: #ff6f61;
+      background: none;
+      -webkit-text-fill-color: unset;
+    }
+    .theme-under18 .sidebar h2 {
+      color: #ffb347;
+    }
+    .theme-under18 .card-value {
+      color: #ff6f61;
+    }
+    .theme-under18 .card {
+      border: 2px dashed #ffb347;
+      position: relative;
+      overflow: hidden;
+    }
+    .theme-under18 .card:before {
+      content: "";
+      position: absolute;
+      top: -20px; left: -20px; width: 65px; height: 65px;
+      background: url('https://em-content.zobj.net/source/twitter/376/sparkles_2728.png') no-repeat center/contain;
+      opacity: 0.13; z-index: 0;
+    }
+    /* Basic Theme (default) */
+    .theme-basic {
+      /* Use default :root values */
+    }
     /* Responsive */
     @media (max-width: 900px) {
       .cards-row { flex-direction: column; gap: 1rem; }
@@ -207,9 +335,27 @@
       .sidebar nav a { padding: 0.9rem 1rem; font-size: 0.98rem;}
       .main-content { margin-left: 0; }
     }
+    /* Theme switcher dropdown */
+    .theme-switcher {
+      margin-left: 1.5rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 0.7rem;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      background: #fff;
+      color: #333;
+      font-family: inherit;
+      outline: none;
+      box-shadow: 0 2px 8px #0001;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    .theme-genz .theme-switcher { background: #232946; color: #56ffc5; border: 1px solid #ff3cac55;}
+    .theme-millennial .theme-switcher { background: #fffbe7; color: #ffb347; border: 1px solid #ffb34744;}
+    .theme-oldage .theme-switcher { background: #f3eac2; color: #bca56c; border: 1px solid #bca56c44;}
+    .theme-under18 .theme-switcher { background: #fff5e6; color: #ffb347; border: 1px solid #ffb34744;}
   </style>
 </head>
-<body>
+<body class="theme-basic">
   <aside class="sidebar">
     <h2>ADMIN</h2>
     <nav>
@@ -223,9 +369,18 @@
   <div class="main-content">
     <div class="dashboard-header">
       <h1>Dashboard</h1>
-      <div class="user-info">
-        <span class="user-avatar">AD</span>
-        <span class="user-name">Admin</span>
+      <div style="display: flex; align-items: center;">
+        <select class="theme-switcher" id="themeSwitcher" title="Change Theme">
+          <option value="basic">Basic</option>
+          <option value="genz">GenZ</option>
+          <option value="millennial">Millennial</option>
+          <option value="oldage">Old Age</option>
+          <option value="under18">Under 18</option>
+        </select>
+        <div class="user-info">
+          <span class="user-avatar">AD</span>
+          <span class="user-name">Admin</span>
+        </div>
       </div>
     </div>
     <div class="cards-row">
@@ -300,5 +455,40 @@
       </table>
     </div>
   </div>
+  <script>
+    // Theme logic: CSS Variables & theme classes
+    const themeMap = {
+      basic: 'theme-basic',
+      genz: 'theme-genz',
+      millennial: 'theme-millennial',
+      oldage: 'theme-oldage',
+      under18: 'theme-under18'
+    };
+    const body = document.body;
+    const themeSwitcher = document.getElementById('themeSwitcher');
+
+    // Load theme from localStorage if exists
+    function setTheme(themeKey) {
+      // Remove old theme classes
+      Object.values(themeMap).forEach(cls => body.classList.remove(cls));
+      // Add new theme
+      body.classList.add(themeMap[themeKey]);
+      // Save to localStorage for persistence
+      localStorage.setItem('dashboardTheme', themeKey);
+      // Update select value (in case setTheme called from code)
+      themeSwitcher.value = themeKey;
+    }
+
+    // On change event
+    themeSwitcher.addEventListener('change', function() {
+      setTheme(this.value);
+    });
+
+    // On page load, check saved theme
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('dashboardTheme') || 'basic';
+      setTheme(savedTheme);
+    });
+  </script>
 </body>
 </html>
