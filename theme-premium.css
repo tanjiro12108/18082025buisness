@@ -1,39 +1,60 @@
 body {
-  font-family: 'Montserrat', 'Arial', sans-serif;
-  background: linear-gradient(120deg, #1a1a40 0%, #2dffe6 100%);
-  color: #fff;
+  font-family: 'Poppins', 'Arial', sans-serif;
+  background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+  color: #ffe066;
   margin: 0;
+  animation: bgMove 10s linear infinite alternate;
+}
+@keyframes bgMove {
+  0% { background-position: 0 0;}
+  100% { background-position: 100% 100%;}
 }
 header {
-  background: transparent;
+  background: rgba(44, 44, 60, 0.95);
+  border-bottom: 2px solid #ffe066;
   padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid #2dffe6;
+  box-shadow: 0 6px 32px #ffe06644;
 }
 .content-card {
   max-width: 600px;
   margin: 40px auto;
-  background: rgba(20, 20, 60, 0.88);
-  border-radius: 32px;
-  box-shadow: 0 8px 24px #2dffe644;
-  padding: 32px;
-  border: 1px solid #2dffe6;
-  transition: transform 0.2s;
+  background: rgba(44, 44, 60, 0.98);
+  border-radius: 24px;
+  box-shadow: 0 12px 32px #ffe06644;
+  padding: 40px;
+  border: 2px solid #ffe066;
+  position: relative;
+  overflow: hidden;
 }
-.content-card:hover {
-  transform: scale(1.03) rotate(-1deg);
+.content-card:before {
+  content: "";
+  position: absolute;
+  top: -20%; left: -20%; width: 140%; height: 140%;
+  background: conic-gradient(from 90deg, #ffe06633, transparent 40%, #ffe06633 80%, transparent);
+  z-index: 0;
+  filter: blur(20px);
+  animation: spinGlow 7s linear infinite;
+}
+@keyframes spinGlow {
+  100% { transform: rotate(360deg);}
 }
 .main-btn {
-  background: linear-gradient(90deg, #2dffe6 0%, #ff2df1 100%);
-  color: #1a1a40;
+  background: linear-gradient(90deg, #ffe066 0%, #ffb347 100%);
+  color: #4e4376;
   border: none;
-  padding: 14px 36px;
-  border-radius: 32px;
-  font-size: 1.2rem;
+  padding: 16px 40px;
+  border-radius: 40px;
+  font-size: 1.3rem;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 20px #ff2df188;
-  text-transform: uppercase;
+  box-shadow: 0 6px 32px #ffe06688;
+  position: relative;
+  z-index: 1;
+  transition: background 0.2s;
+}
+.main-btn:hover {
+  background: linear-gradient(90deg, #ffb347 0%, #ffe066 100%);
 }
