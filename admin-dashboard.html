@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Dashboard with Theme Management</title>
+  <title>Dashboard - Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- (Copy your dashboard CSS here) -->
   <style>
+    /* ...[copy the CSS from your dashboard file here]... */
+    /* See previous code blocks for styles */
     :root {
       --primary: #3f51b5;
       --primary-dark: #283593;
@@ -359,11 +362,11 @@
   <aside class="sidebar">
     <h2>ADMIN</h2>
     <nav>
-      <a href="#" class="active">Dashboard</a>
-      <a href="#">Users</a>
-      <a href="#">Analytics</a>
-      <a href="#">Settings</a>
-      <a href="#">Logout</a>
+      <a href="admin-dashboard.html" class="active">Dashboard</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-analytics.html">Analytics</a>
+      <a href="admin-settings.html">Settings</a>
+      <a href="#" id="logoutLink">Logout</a>
     </nav>
   </aside>
   <div class="main-content">
@@ -383,6 +386,7 @@
         </div>
       </div>
     </div>
+    <!-- Dashboard content (cards, table, etc.) -->
     <div class="cards-row">
       <div class="card">
         <div class="card-title">Total Users</div>
@@ -467,27 +471,27 @@
     const body = document.body;
     const themeSwitcher = document.getElementById('themeSwitcher');
 
-    // Load theme from localStorage if exists
     function setTheme(themeKey) {
-      // Remove old theme classes
       Object.values(themeMap).forEach(cls => body.classList.remove(cls));
-      // Add new theme
       body.classList.add(themeMap[themeKey]);
-      // Save to localStorage for persistence
       localStorage.setItem('dashboardTheme', themeKey);
-      // Update select value (in case setTheme called from code)
       themeSwitcher.value = themeKey;
     }
 
-    // On change event
     themeSwitcher.addEventListener('change', function() {
       setTheme(this.value);
     });
 
-    // On page load, check saved theme
     window.addEventListener('DOMContentLoaded', () => {
       const savedTheme = localStorage.getItem('dashboardTheme') || 'basic';
       setTheme(savedTheme);
+    });
+
+    // Logout logic
+    document.getElementById('logoutLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      // (Optional) Remove session info here if you add it in the future
+      window.location.href = "login.html";
     });
   </script>
 </body>
