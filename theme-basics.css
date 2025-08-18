@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  color: #222;
+  margin: 0;
+}
+header {
+  background: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.content-card {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #0001;
+  padding: 32px;
+}
+.main-btn {
+  background: #cc0000;
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 3px;
+  font-size: 1rem;
+  cursor: pointer;
+}
