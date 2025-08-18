@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Users - Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- (Copy your dashboard CSS here) -->
+  <style>
+    /* ...[same CSS as dashboard file]... */
+  </style>
+</head>
+<body class="theme-basic">
+  <aside class="sidebar">
+    <h2>ADMIN</h2>
+    <nav>
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-users.html" class="active">Users</a>
+      <a href="admin-analytics.html">Analytics</a>
+      <a href="admin-settings.html">Settings</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </aside>
+  <div class="main-content">
+    <div class="dashboard-header">
+      <h1>Users</h1>
+      <div style="display: flex; align-items: center;">
+        <select class="theme-switcher" id="themeSwitcher" title="Change Theme">
+          <option value="basic">Basic</option>
+          <option value="genz">GenZ</option>
+          <option value="millennial">Millennial</option>
+          <option value="oldage">Old Age</option>
+          <option value="under18">Under 18</option>
+        </select>
+        <div class="user-info">
+          <span class="user-avatar">AD</span>
+          <span class="user-name">Admin</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-title">Manage Users</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tanjiro Kamado</td>
+              <td>tanjiro@example.com</td>
+              <td><span class="status active">Active</span></td>
+              <td>
+                <button style="padding:0.2rem 0.8rem;">Edit</button>
+                <button style="padding:0.2rem 0.8rem;">Block</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Nezuko Kamado</td>
+              <td>nezuko@example.com</td>
+              <td><span class="status pending">Pending</span></td>
+              <td>
+                <button style="padding:0.2rem 0.8rem;">Edit</button>
+                <button style="padding:0.2rem 0.8rem;">Block</button>
+              </td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script>
+    // (Copy the JS from your dashboard file here)
+    const themeMap = {
+      basic: 'theme-basic',
+      genz: 'theme-genz',
+      millennial: 'theme-millennial',
+      oldage: 'theme-oldage',
+      under18: 'theme-under18'
+    };
+    const body = document.body;
+    const themeSwitcher = document.getElementById('themeSwitcher');
+
+    function setTheme(themeKey) {
+      Object.values(themeMap).forEach(cls => body.classList.remove(cls));
+      body.classList.add(themeMap[themeKey]);
+      localStorage.setItem('dashboardTheme', themeKey);
+      themeSwitcher.value = themeKey;
+    }
+
+    themeSwitcher.addEventListener('change', function() {
+      setTheme(this.value);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('dashboardTheme') || 'basic';
+      setTheme(savedTheme);
+    });
+  </script>
+</body>
+</html>
