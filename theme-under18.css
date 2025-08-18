@@ -1,0 +1,52 @@
+body {
+  font-family: 'Comic Sans MS', 'Arial', sans-serif;
+  background: linear-gradient(120deg, #ffecd2 0%, #fcb69f 100%);
+  color: #355c7d;
+  margin: 0;
+}
+header {
+  background: #fff5e6;
+  border-bottom: 2px solid #ffb347;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.content-card {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fffbe7;
+  border-radius: 25px;
+  box-shadow: 0 8px 24px #ffb34744;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.content-card:before {
+  content: "";
+  position: absolute;
+  top: -40px; left: -40px; width: 100px; height: 100px;
+  background: url('https://em-content.zobj.net/source/twitter/376/sparkles_2728.png') no-repeat center/contain;
+  opacity: 0.2;
+  z-index: 0;
+}
+h2, .main-btn {
+  position: relative;
+  z-index: 1;
+}
+.main-btn {
+  background: linear-gradient(90deg, #fcb69f 0%, #ffecd2 100%);
+  color: #355c7d;
+  border: 2px dashed #ffb347;
+  padding: 12px 32px;
+  border-radius: 18px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 10px #fcb69f55;
+  transition: background 0.2s, color 0.2s;
+}
+.main-btn:hover {
+  background: #ffe29f;
+  color: #ff6f61;
+}
