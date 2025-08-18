@@ -4,20 +4,17 @@
   <meta charset="UTF-8">
   <title>Analytics - Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- (Copy your dashboard CSS here) -->
-  <style>
-    /* ...[same CSS as dashboard file]... */
-  </style>
+  <link rel="stylesheet" href="dashboard-sidebar.css">
 </head>
 <body class="theme-basic">
   <aside class="sidebar">
     <h2>ADMIN</h2>
     <nav>
-      <a href="admin-dashboard.html">Dashboard</a>
-      <a href="admin-users.html">Users</a>
-      <a href="admin-analytics.html" class="active">Analytics</a>
-      <a href="admin-settings.html">Settings</a>
-      <a href="login.html">Logout</a>
+      <a href="admin-dashboard.html" class="dashboard">Dashboard</a>
+      <a href="admin-users.html" class="users">Users</a>
+      <a href="admin-analytics.html" class="analytics active">Analytics</a>
+      <a href="admin-settings.html" class="settings">Settings</a>
+      <a href="#" id="logoutLink" class="logout">Logout</a>
     </nav>
   </aside>
   <div class="main-content">
@@ -52,7 +49,7 @@
     </div>
   </div>
   <script>
-    // (Copy the JS from your dashboard file here)
+    // Theme logic
     const themeMap = {
       basic: 'theme-basic',
       genz: 'theme-genz',
@@ -62,21 +59,23 @@
     };
     const body = document.body;
     const themeSwitcher = document.getElementById('themeSwitcher');
-
     function setTheme(themeKey) {
       Object.values(themeMap).forEach(cls => body.classList.remove(cls));
       body.classList.add(themeMap[themeKey]);
       localStorage.setItem('dashboardTheme', themeKey);
       themeSwitcher.value = themeKey;
     }
-
     themeSwitcher.addEventListener('change', function() {
       setTheme(this.value);
     });
-
     window.addEventListener('DOMContentLoaded', () => {
       const savedTheme = localStorage.getItem('dashboardTheme') || 'basic';
       setTheme(savedTheme);
+    });
+    // Logout logic
+    document.getElementById('logoutLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = "login.html";
     });
   </script>
 </body>
