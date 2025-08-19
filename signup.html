@@ -172,6 +172,13 @@
       color: #3f51b5;
       text-decoration: underline;
     }
+    .error-msg {
+      color: #e53935;
+      font-size: 0.97rem;
+      margin-bottom: 0.75rem;
+      display: none;
+      text-align: center;
+    }
     @media (max-width: 550px) {
       .signup-container {
         padding: 1.3rem 0.5rem 1.3rem 0.5rem;
@@ -185,6 +192,7 @@
     <div class="signup-title">Sign Up</div>
     <div class="signup-subtitle">Create your admin account to access the dashboard</div>
     <form class="signup-form" autocomplete="off">
+      <div class="error-msg" id="errorMsg"></div>
       <div class="input-group">
         <label for="name">Name</label>
         <input id="name" name="name" type="text" required autocomplete="off" placeholder="Enter your name">
@@ -225,6 +233,11 @@
     </div>
   </div>
   <script>
+    // If already signed up, redirect to login (or main) page
+    if(localStorage.getItem('user')) {
+      window.location.href = "login.html";
+    }
+
     // Theme selector UI logic
     const themeSelector = document.getElementById('themeSelector');
     let selectedTheme = 'basic';
@@ -236,14 +249,53 @@
       });
     });
 
-    // On form submit, demo: store theme in localStorage and show alert
+    // Signup logic
     document.querySelector('.signup-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      // Save selected theme to localStorage (simulate backend usage)
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const password = document.getElementById('password').value;
+      const errorMsg = document.getElementById('errorMsg');
+
+      // Simple validation (email, password > 3 chars)
+      if(name.length < 2) {
+        errorMsg.textContent = "Please enter a valid name.";
+        errorMsg.style.display = "block";
+        return;
+      }
+      if(!/^[\w\-.]+@([\w-]+\.)+[\w-]{2,}$/.test(email)) {
+        errorMsg.textContent = "Please enter a valid email address.";
+        errorMsg.style.display = "block";
+        return;
+      }
+      if(password.length < 4) {
+        errorMsg.textContent = "Password must be at least 4 characters.";
+        errorMsg.style.display = "block";
+        return;
+      }
+      // Check if user already exists (by email)
+      const savedUser = JSON.parse(localStorage.getItem('user'));
+      if(savedUser && savedUser.email === email) {
+        errorMsg.textContent = "An account with this email already exists.";
+        errorMsg.style.display = "block";
+        return;
+      }
+      errorMsg.style.display = "none";
+
+      // Save user info (simulate backend)
+      localStorage.setItem('user', JSON.stringify({
+        name,
+        email,
+        password, // In real app, never store plain password!
+        theme: selectedTheme
+      }));
       localStorage.setItem('dashboardTheme', selectedTheme);
-      // Simulate navigation to dashboard
-      alert('Signup successful! You selected the "'+selectedTheme+'" theme.\nNow you will be redirected to login.');
-      window.location.href = "login.html";
+
+      // Set logged-in flag
+      localStorage.setItem('loggedIn', 'true');
+
+      // Redirect to main dashboard
+      window.location.href = "admin-dashboard.html";
     });
   </script>
 </body>
