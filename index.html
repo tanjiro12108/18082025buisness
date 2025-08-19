@@ -17,6 +17,8 @@
       --radius: 1rem;
       --shadow: 0 4px 16px rgba(60,60,60,0.10);
       --transition: 0.2s;
+      --text-color: #232946;
+      --subtitle-color: #687188;
     }
     body {
       background: var(--bg);
@@ -26,6 +28,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
     }
     .signup-container {
       background: var(--white);
@@ -37,6 +41,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
     }
     .signup-title {
       font-size: 2rem;
@@ -46,7 +51,7 @@
       letter-spacing: 1px;
     }
     .signup-subtitle {
-      color: #687188;
+      color: var(--subtitle-color);
       margin-bottom: 2.2rem;
       font-size: 1.02rem;
     }
@@ -78,6 +83,7 @@
       font-size: 1rem;
       outline: none;
       transition: border var(--transition), box-shadow var(--transition);
+      color: var(--text-color);
     }
     input[type="text"]:focus,
     input[type="email"]:focus,
@@ -115,6 +121,7 @@
       position: relative;
       min-width: 80px;
       justify-content: center;
+      color: var(--text-color);
     }
     .theme-option.selected,
     .theme-option:hover {
@@ -172,19 +179,162 @@
       color: #3f51b5;
       text-decoration: underline;
     }
+    .error-msg {
+      color: #e53935;
+      font-size: 0.97rem;
+      margin-bottom: 0.75rem;
+      display: none;
+      text-align: center;
+    }
+
+    /* Toggle switch for dark mode */
+    .toggle-switch {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      display: flex;
+      align-items: center;
+      z-index: 2;
+    }
+    .switch-label {
+      margin-right: 0.4em;
+      font-size: 1.07em;
+      color: #888;
+      user-select: none;
+      letter-spacing: 0.03em;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 26px;
+    }
+    .switch input { display: none; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #d1d5db;
+      transition: background-color 0.2s;
+      border-radius: 26px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #fff;
+      transition: .2s;
+      border-radius: 50%;
+      box-shadow: 0 1px 4px #0002;
+    }
+    input:checked + .slider {
+      background-color: #3f51b5;
+    }
+    input:checked + .slider:before {
+      transform: translateX(20px);
+      background: #232946;
+    }
+    .slider:after {
+      content: "🌙";
+      position: absolute;
+      right: 8px;
+      top: 4px;
+      font-size: 1rem;
+      transition: color 0.2s;
+      color: #555;
+    }
+    input:checked + .slider:after {
+      content: "☀️";
+      left: 8px;
+      right: auto;
+      color: #fbc02d;
+    }
+
+    /* DARK MODE */
+    body.dark {
+      --primary: #90caf9;
+      --primary-dark: #1976d2;
+      --accent: #ff4081;
+      --bg: #22223b;
+      --white: #232946;
+      --input-bg: #232946;
+      --input-border: #35377b;
+      --input-focus: #90caf9;
+      --text-color: #f3f4f8;
+      --subtitle-color: #c0c1c8;
+    }
+    body.dark input[type="text"],
+    body.dark input[type="email"],
+    body.dark input[type="password"] {
+      color: #f3f4f8;
+      background: #232946;
+      border-color: #35377b;
+    }
+    body.dark .signup-container {
+      box-shadow: 0 4px 24px #0008;
+    }
+    body.dark .signup-title {
+      color: #90caf9;
+    }
+    body.dark .theme-option {
+      background: #22223b;
+      color: #f3f4f8;
+    }
+    body.dark .theme-option .color-dot {
+      border: 2px solid #232946;
+    }
+    body.dark .theme-option.selected,
+    body.dark .theme-option:hover {
+      background: #232946;
+      color: #90caf9;
+    }
+    body.dark .signup-btn {
+      background: linear-gradient(90deg, #1976d2, #ff4081);
+      color: #fff;
+    }
+    body.dark .login-link {
+      color: #90caf9;
+    }
+    body.dark .login-link a {
+      color: #ff4081;
+    }
+    body.dark label,
+    body.dark .theme-selector-label {
+      color: #90caf9;
+    }
+    body.dark .error-msg {
+      color: #ff7a7a;
+    }
+
     @media (max-width: 550px) {
       .signup-container {
         padding: 1.3rem 0.5rem 1.3rem 0.5rem;
         border-radius: 0.7rem;
+      }
+      .toggle-switch {
+        top: 12px;
+        right: 10px;
       }
     }
   </style>
 </head>
 <body>
   <div class="signup-container">
+    <!-- Toggle for light/dark mode -->
+    <div class="toggle-switch">
+      <span class="switch-label" id="modeLabel">Light</span>
+      <label class="switch">
+        <input type="checkbox" id="toggleMode">
+        <span class="slider"></span>
+      </label>
+    </div>
     <div class="signup-title">Sign Up</div>
     <div class="signup-subtitle">Create your admin account to access the dashboard</div>
     <form class="signup-form" autocomplete="off">
+      <div class="error-msg" id="errorMsg"></div>
       <div class="input-group">
         <label for="name">Name</label>
         <input id="name" name="name" type="text" required autocomplete="off" placeholder="Enter your name">
@@ -225,6 +375,42 @@
     </div>
   </div>
   <script>
+    // Dark mode toggle logic
+    const toggle = document.getElementById('toggleMode');
+    const modeLabel = document.getElementById('modeLabel');
+
+    function setMode(mode) {
+      if (mode === 'dark') {
+        document.body.classList.add('dark');
+        toggle.checked = true;
+        modeLabel.textContent = 'Dark';
+        localStorage.setItem('mode', 'dark');
+      } else {
+        document.body.classList.remove('dark');
+        toggle.checked = false;
+        modeLabel.textContent = 'Light';
+        localStorage.setItem('mode', 'light');
+      }
+    }
+
+    // On load, set mode from localStorage or system preference
+    window.addEventListener('DOMContentLoaded', () => {
+      let mode = localStorage.getItem('mode');
+      if (!mode) {
+        mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      setMode(mode);
+    });
+
+    toggle.addEventListener('change', function() {
+      setMode(this.checked ? 'dark' : 'light');
+    });
+
+    // If already signed up, redirect to login (or main) page
+    if(localStorage.getItem('user')) {
+      window.location.href = "login.html";
+    }
+
     // Theme selector UI logic
     const themeSelector = document.getElementById('themeSelector');
     let selectedTheme = 'basic';
@@ -236,14 +422,52 @@
       });
     });
 
-    // On form submit, demo: store theme in localStorage and show alert
+    // Signup logic
     document.querySelector('.signup-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      // Save selected theme to localStorage (simulate backend usage)
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const password = document.getElementById('password').value;
+      const errorMsg = document.getElementById('errorMsg');
+
+      if(name.length < 2) {
+        errorMsg.textContent = "Please enter a valid name.";
+        errorMsg.style.display = "block";
+        return;
+      }
+      if(!/^[\w\-.]+@([\w-]+\.)+[\w-]{2,}$/.test(email)) {
+        errorMsg.textContent = "Please enter a valid email address.";
+        errorMsg.style.display = "block";
+        return;
+      }
+      if(password.length < 4) {
+        errorMsg.textContent = "Password must be at least 4 characters.";
+        errorMsg.style.display = "block";
+        return;
+      }
+      // Check if user already exists (by email)
+      const savedUser = JSON.parse(localStorage.getItem('user'));
+      if(savedUser && savedUser.email === email) {
+        errorMsg.textContent = "An account with this email already exists.";
+        errorMsg.style.display = "block";
+        return;
+      }
+      errorMsg.style.display = "none";
+
+      // Save user info (simulate backend)
+      localStorage.setItem('user', JSON.stringify({
+        name,
+        email,
+        password, // In real app, never store plain password!
+        theme: selectedTheme
+      }));
       localStorage.setItem('dashboardTheme', selectedTheme);
-      // Simulate navigation to dashboard
-      alert('Signup successful! You selected the "'+selectedTheme+'" theme.\nNow you will be redirected to login.');
-      window.location.href = "login.html";
+
+      // Set logged-in flag
+      localStorage.setItem('loggedIn', 'true');
+
+      // Redirect to main dashboard
+      window.location.href = "admin-dashboard.html";
     });
   </script>
 </body>
