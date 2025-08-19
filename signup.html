@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup - Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --primary: #3f51b5;
+      --primary-dark: #283593;
+      --accent: #ff4081;
+      --bg: #f4f6f8;
+      --white: #fff;
+      --input-bg: #f7f8fa;
+      --input-border: #d1d5db;
+      --input-focus: #3f51b5;
+      --radius: 1rem;
+      --shadow: 0 4px 16px rgba(60,60,60,0.10);
+      --transition: 0.2s;
+    }
+    body {
+      background: var(--bg);
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .signup-container {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem 2rem 2rem;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .signup-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+      letter-spacing: 1px;
+    }
+    .signup-subtitle {
+      color: #687188;
+      margin-bottom: 2.2rem;
+      font-size: 1.02rem;
+    }
+    form.signup-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+    }
+    .input-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    label {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #283593;
+      margin-bottom: 0.2rem;
+      letter-spacing: .03em;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 0.8rem 1.1rem;
+      border-radius: 0.7rem;
+      border: 1.6px solid var(--input-border);
+      background: var(--input-bg);
+      font-size: 1rem;
+      outline: none;
+      transition: border var(--transition), box-shadow var(--transition);
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: var(--input-focus);
+      box-shadow: 0 0 0 2px #3f51b540;
+    }
+    .theme-selector-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .theme-selector-label {
+      font-weight: 500;
+      color: #283593;
+      margin-bottom: 0.2rem;
+      font-size: 1rem;
+    }
+    .theme-selector {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .theme-option {
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+      padding: 0.2em 0.9em 0.2em 0.3em;
+      border-radius: 0.6em;
+      cursor: pointer;
+      border: 2px solid transparent;
+      background: #f3f4f8;
+      font-size: 1rem;
+      transition: border var(--transition), background var(--transition), color var(--transition);
+      position: relative;
+      min-width: 80px;
+      justify-content: center;
+    }
+    .theme-option.selected,
+    .theme-option:hover {
+      border: 2px solid var(--primary);
+      background: #e8eaff;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+    .theme-option .color-dot {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      border-radius: 50%;
+      margin-right: 0.4em;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px #0001;
+    }
+    .theme-dot-basic { background: #3f51b5; }
+    .theme-dot-genz { background: #56ffc5; }
+    .theme-dot-millennial { background: #ffb347; }
+    .theme-dot-oldage { background: #bca56c; }
+    .theme-dot-under18 { background: #fcb69f; }
+    .signup-btn {
+      padding: 0.9rem 0;
+      width: 100%;
+      border: none;
+      border-radius: 0.7rem;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      box-shadow: 0 3px 16px #3f51b520;
+      margin-top: 0.2rem;
+      transition: background 0.2s;
+    }
+    .signup-btn:hover {
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+    }
+    .login-link {
+      margin-top: 2rem;
+      font-size: 0.98rem;
+      color: #3f51b5;
+      text-align: center;
+    }
+    .login-link a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 0.3em;
+      transition: color 0.2s;
+    }
+    .login-link a:hover {
+      color: #3f51b5;
+      text-decoration: underline;
+    }
+    @media (max-width: 550px) {
+      .signup-container {
+        padding: 1.3rem 0.5rem 1.3rem 0.5rem;
+        border-radius: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <div class="signup-title">Sign Up</div>
+    <div class="signup-subtitle">Create your admin account to access the dashboard</div>
+    <form class="signup-form" autocomplete="off">
+      <div class="input-group">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required autocomplete="off" placeholder="Enter your name">
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required autocomplete="off" placeholder="Enter your email">
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required autocomplete="off" placeholder="Enter password">
+      </div>
+      <div class="theme-selector-group">
+        <div class="theme-selector-label">Choose your dashboard theme</div>
+        <div class="theme-selector" id="themeSelector">
+          <div class="theme-option selected" data-theme="basic">
+            <span class="color-dot theme-dot-basic"></span> Basic
+          </div>
+          <div class="theme-option" data-theme="genz">
+            <span class="color-dot theme-dot-genz"></span> GenZ
+          </div>
+          <div class="theme-option" data-theme="millennial">
+            <span class="color-dot theme-dot-millennial"></span> Millennial
+          </div>
+          <div class="theme-option" data-theme="oldage">
+            <span class="color-dot theme-dot-oldage"></span> Old Age
+          </div>
+          <div class="theme-option" data-theme="under18">
+            <span class="color-dot theme-dot-under18"></span> Under 18
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="signup-btn">Create Account</button>
+    </form>
+    <div class="login-link">
+      Already have an account?
+      <a href="login.html">Log in</a>
+    </div>
+  </div>
+  <script>
+    // Theme selector UI logic
+    const themeSelector = document.getElementById('themeSelector');
+    let selectedTheme = 'basic';
+    themeSelector.querySelectorAll('.theme-option').forEach(option => {
+      option.addEventListener('click', function() {
+        themeSelector.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected'));
+        this.classList.add('selected');
+        selectedTheme = this.getAttribute('data-theme');
+      });
+    });
+
+    // On form submit, demo: store theme in localStorage and show alert
+    document.querySelector('.signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Save selected theme to localStorage (simulate backend usage)
+      localStorage.setItem('dashboardTheme', selectedTheme);
+      // Simulate navigation to dashboard
+      alert('Signup successful! You selected the "'+selectedTheme+'" theme.\nNow you will be redirected to login.');
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
