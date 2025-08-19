@@ -2,64 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Signup - Admin Dashboard</title>
+  <title>Sign Up - Admin Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    :root {
-      --primary: #3f51b5;
-      --primary-dark: #283593;
-      --accent: #ff4081;
-      --bg: #f4f6f8;
-      --white: #fff;
-      --input-bg: #f7f8fa;
-      --input-border: #d1d5db;
-      --input-focus: #3f51b5;
-      --radius: 1rem;
-      --shadow: 0 4px 16px rgba(60,60,60,0.10);
-      --transition: 0.2s;
-      --text-color: #232946;
-      --subtitle-color: #687188;
-    }
     body {
-      background: var(--bg);
+      background: #151c2c;
       min-height: 100vh;
       margin: 0;
       font-family: 'Poppins', Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: var(--text-color);
+      color: #bcdfff;
       transition: background 0.3s, color 0.3s;
     }
     .signup-container {
-      background: var(--white);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-      padding: 2.5rem 2rem 2rem 2rem;
+      background: #1e2540;
+      box-shadow: 0 8px 32px #0006;
+      border-radius: 1.5rem;
+      padding: 2.5rem 2rem 2.2rem 2rem;
       width: 100%;
-      max-width: 400px;
+      max-width: 450px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
     }
     .signup-title {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 700;
-      color: var(--primary);
+      color: #80cfff;
       margin-bottom: 0.3rem;
       letter-spacing: 1px;
+      text-align: center;
     }
     .signup-subtitle {
-      color: var(--subtitle-color);
+      color: #c5e2ff;
       margin-bottom: 2.2rem;
-      font-size: 1.02rem;
+      font-size: 1.08rem;
+      text-align: center;
     }
     form.signup-form {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 1.3rem;
+      gap: 1.2rem;
     }
     .input-group {
       width: 100%;
@@ -69,169 +56,181 @@
     }
     label {
       font-weight: 500;
-      font-size: 1rem;
-      color: #283593;
-      margin-bottom: 0.2rem;
+      font-size: 1.08rem;
+      color: #7ecbff;
+      margin-bottom: 0.15rem;
       letter-spacing: .03em;
     }
     input[type="text"], input[type="email"], input[type="password"] {
       width: 100%;
-      padding: 0.8rem 1.1rem;
-      border-radius: 0.7rem;
-      border: 1.6px solid var(--input-border);
-      background: var(--input-bg);
-      font-size: 1rem;
+      padding: 1rem 1.2rem;
+      border-radius: 0.8rem;
+      border: 1.6px solid #294980;
+      background: #202b4a;
+      font-size: 1.08rem;
+      color: #bcdfff;
       outline: none;
-      transition: border var(--transition), box-shadow var(--transition);
-      color: var(--text-color);
+      transition: border 0.2s, box-shadow 0.2s;
     }
     input[type="text"]:focus,
     input[type="email"]:focus,
     input[type="password"]:focus {
-      border-color: var(--input-focus);
-      box-shadow: 0 0 0 2px #3f51b540;
+      border-color: #80cfff;
+      box-shadow: 0 0 0 2px #80cfff30;
     }
+    /* Theme selector custom chips */
     .theme-selector-group {
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
+      margin-bottom: 0.3rem;
     }
     .theme-selector-label {
       font-weight: 500;
-      color: #283593;
-      margin-bottom: 0.2rem;
-      font-size: 1rem;
+      color: #7ecbff;
+      margin-bottom: 0.25rem;
+      font-size: 1.08rem;
     }
     .theme-selector {
       display: flex;
-      gap: 0.6rem;
       flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 0.1rem;
     }
-    .theme-option {
+    .theme-chip {
       display: flex;
       align-items: center;
-      gap: 0.3em;
-      padding: 0.2em 0.9em 0.2em 0.3em;
-      border-radius: 0.6em;
+      gap: 0.45em;
+      padding: 0.38em 1.1em;
+      border-radius: 2em;
+      font-size: 1.04em;
       cursor: pointer;
-      border: 2px solid transparent;
-      background: #f3f4f8;
-      font-size: 1rem;
-      transition: border var(--transition), background var(--transition), color var(--transition);
-      position: relative;
-      min-width: 80px;
+      background: #151c2c;
+      border: 2.2px solid transparent;
+      color: #bcdfff;
+      font-weight: 500;
+      transition: border 0.2s, background 0.2s, color 0.2s;
+      outline: none;
+      min-width: 108px;
       justify-content: center;
-      color: var(--text-color);
+      box-sizing: border-box;
+      user-select: none;
+      margin-bottom: 2px;
     }
-    .theme-option.selected,
-    .theme-option:hover {
-      border: 2px solid var(--primary);
-      background: #e8eaff;
-      color: var(--primary-dark);
-      font-weight: 600;
+    .theme-chip.selected {
+      border: 2.2px solid #80cfff;
+      background: #192a4d;
+      color: #80cfff;
+      font-weight: 700;
     }
-    .theme-option .color-dot {
-      display: inline-block;
-      width: 1em;
-      height: 1em;
+    .theme-chip .color-dot {
+      width: 1.15em;
+      height: 1.15em;
       border-radius: 50%;
-      margin-right: 0.4em;
-      border: 2px solid #fff;
-      box-shadow: 0 2px 6px #0001;
+      display: inline-block;
+      border: 2px solid #222e50;
+      margin-right: 0.1em;
+      box-shadow: 0 1px 4px #0002;
     }
-    .theme-dot-basic { background: #3f51b5; }
-    .theme-dot-genz { background: #56ffc5; }
-    .theme-dot-millennial { background: #ffb347; }
-    .theme-dot-oldage { background: #bca56c; }
-    .theme-dot-under18 { background: #fcb69f; }
+    .dot-basic { background: #5865f2; }
+    .dot-genz { background: #1de9b6; }
+    .dot-millennial { background: #ffb347; }
+    .dot-oldage { background: #bca56c; }
+    .dot-under18 { background: #fcb69f; }
+
     .signup-btn {
-      padding: 0.9rem 0;
+      padding: 1rem 0;
       width: 100%;
       border: none;
-      border-radius: 0.7rem;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 0.9rem;
+      background: linear-gradient(90deg, #2196f3 10%, #ff4081 90%);
       color: #fff;
-      font-size: 1.15rem;
+      font-size: 1.19rem;
       font-weight: 700;
       letter-spacing: 0.05em;
       cursor: pointer;
-      box-shadow: 0 3px 16px #3f51b520;
-      margin-top: 0.2rem;
-      transition: background 0.2s;
+      box-shadow: 0 3px 14px #3f51b530;
+      margin-top: 0.7rem;
+      margin-bottom: 0.5rem;
+      transition: background 0.2s, box-shadow 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .signup-btn:hover {
-      background: linear-gradient(90deg, var(--accent), var(--primary));
+      background: linear-gradient(90deg, #ff4081 10%, #2196f3 90%);
+      box-shadow: 0 5px 22px #ff40814a;
     }
     .login-link {
-      margin-top: 2rem;
-      font-size: 0.98rem;
-      color: #3f51b5;
+      margin-top: 1.6rem;
+      font-size: 1.05rem;
+      color: #80cfff;
       text-align: center;
     }
     .login-link a {
-      color: var(--accent);
+      color: #ff4081;
       text-decoration: none;
       font-weight: 600;
       margin-left: 0.3em;
       transition: color 0.2s;
     }
     .login-link a:hover {
-      color: #3f51b5;
+      color: #ffb347;
       text-decoration: underline;
     }
     .error-msg {
-      color: #e53935;
+      color: #ff7a7a;
       font-size: 0.97rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
       display: none;
       text-align: center;
     }
-
-    /* Toggle switch for dark mode */
+    /* Dark mode toggle */
     .toggle-switch {
       position: absolute;
-      top: 18px;
-      right: 22px;
+      top: 1.3rem;
+      right: 2.2rem;
       display: flex;
       align-items: center;
       z-index: 2;
+      gap: 0.2em;
     }
     .switch-label {
-      margin-right: 0.4em;
-      font-size: 1.07em;
-      color: #888;
+      margin-right: 0.32em;
+      font-size: 1.08em;
+      color: #bcdfff;
       user-select: none;
       letter-spacing: 0.03em;
     }
     .switch {
       position: relative;
       display: inline-block;
-      width: 46px;
-      height: 26px;
+      width: 44px;
+      height: 24px;
     }
     .switch input { display: none; }
     .slider {
       position: absolute;
       cursor: pointer;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #d1d5db;
+      background-color: #2c395b;
       transition: background-color 0.2s;
-      border-radius: 26px;
+      border-radius: 24px;
     }
     .slider:before {
       position: absolute;
       content: "";
-      height: 20px;
-      width: 20px;
+      height: 18px;
+      width: 18px;
       left: 3px;
-      bottom: 3px;
+      top: 3px;
       background-color: #fff;
       transition: .2s;
       border-radius: 50%;
       box-shadow: 0 1px 4px #0002;
     }
     input:checked + .slider {
-      background-color: #3f51b5;
+      background-color: #ffc107;
     }
     input:checked + .slider:before {
       transform: translateX(20px);
@@ -241,55 +240,55 @@
       content: "🌙";
       position: absolute;
       right: 8px;
-      top: 4px;
+      top: 3.5px;
       font-size: 1rem;
       transition: color 0.2s;
-      color: #555;
+      color: #fff;
     }
     input:checked + .slider:after {
       content: "☀️";
       left: 8px;
       right: auto;
-      color: #fbc02d;
+      color: #ffe082;
     }
-
     /* DARK MODE */
     body.dark {
-      --primary: #90caf9;
-      --primary-dark: #1976d2;
-      --accent: #ff4081;
-      --bg: #22223b;
-      --white: #232946;
-      --input-bg: #232946;
-      --input-border: #35377b;
-      --input-focus: #90caf9;
-      --text-color: #f3f4f8;
-      --subtitle-color: #c0c1c8;
-    }
-    body.dark input[type="text"],
-    body.dark input[type="email"],
-    body.dark input[type="password"] {
-      color: #f3f4f8;
-      background: #232946;
-      border-color: #35377b;
+      background: #10182e;
+      color: #bcdfff;
     }
     body.dark .signup-container {
-      box-shadow: 0 4px 24px #0008;
+      background: #171e36;
+      box-shadow: 0 6px 32px #0008;
     }
     body.dark .signup-title {
       color: #90caf9;
     }
-    body.dark .theme-option {
-      background: #22223b;
-      color: #f3f4f8;
+    body.dark .signup-subtitle {
+      color: #bcdfff;
     }
-    body.dark .theme-option .color-dot {
-      border: 2px solid #232946;
-    }
-    body.dark .theme-option.selected,
-    body.dark .theme-option:hover {
-      background: #232946;
+    body.dark label,
+    body.dark .theme-selector-label {
       color: #90caf9;
+    }
+    body.dark input[type="text"],
+    body.dark input[type="email"],
+    body.dark input[type="password"] {
+      color: #e7eefc;
+      background: #222b44;
+      border-color: #294980;
+    }
+    body.dark .theme-chip {
+      background: #232946;
+      color: #bcdfff;
+      border-color: transparent;
+    }
+    body.dark .theme-chip.selected {
+      background: #192a4d;
+      border: 2.2px solid #90caf9;
+      color: #90caf9;
+    }
+    body.dark .theme-chip .color-dot {
+      border: 2px solid #232946;
     }
     body.dark .signup-btn {
       background: linear-gradient(90deg, #1976d2, #ff4081);
@@ -301,22 +300,17 @@
     body.dark .login-link a {
       color: #ff4081;
     }
-    body.dark label,
-    body.dark .theme-selector-label {
-      color: #90caf9;
+    body.dark .login-link a:hover {
+      color: #ffb347;
     }
-    body.dark .error-msg {
-      color: #ff7a7a;
-    }
-
     @media (max-width: 550px) {
       .signup-container {
         padding: 1.3rem 0.5rem 1.3rem 0.5rem;
         border-radius: 0.7rem;
       }
       .toggle-switch {
-        top: 12px;
-        right: 10px;
+        top: 0.7rem;
+        right: 0.8rem;
       }
     }
   </style>
@@ -325,9 +319,9 @@
   <div class="signup-container">
     <!-- Toggle for light/dark mode -->
     <div class="toggle-switch">
-      <span class="switch-label" id="modeLabel">Light</span>
+      <span class="switch-label" id="modeLabel">Dark</span>
       <label class="switch">
-        <input type="checkbox" id="toggleMode">
+        <input type="checkbox" id="toggleMode" checked>
         <span class="slider"></span>
       </label>
     </div>
@@ -350,20 +344,20 @@
       <div class="theme-selector-group">
         <div class="theme-selector-label">Choose your dashboard theme</div>
         <div class="theme-selector" id="themeSelector">
-          <div class="theme-option selected" data-theme="basic">
-            <span class="color-dot theme-dot-basic"></span> Basic
+          <div class="theme-chip selected" data-theme="basic">
+            <span class="color-dot dot-basic"></span> Basic
           </div>
-          <div class="theme-option" data-theme="genz">
-            <span class="color-dot theme-dot-genz"></span> GenZ
+          <div class="theme-chip" data-theme="genz">
+            <span class="color-dot dot-genz"></span> GenZ
           </div>
-          <div class="theme-option" data-theme="millennial">
-            <span class="color-dot theme-dot-millennial"></span> Millennial
+          <div class="theme-chip" data-theme="millennial">
+            <span class="color-dot dot-millennial"></span> Millennial
           </div>
-          <div class="theme-option" data-theme="oldage">
-            <span class="color-dot theme-dot-oldage"></span> Old Age
+          <div class="theme-chip" data-theme="oldage">
+            <span class="color-dot dot-oldage"></span> Old Age
           </div>
-          <div class="theme-option" data-theme="under18">
-            <span class="color-dot theme-dot-under18"></span> Under 18
+          <div class="theme-chip" data-theme="under18">
+            <span class="color-dot dot-under18"></span> Under 18
           </div>
         </div>
       </div>
@@ -414,9 +408,9 @@
     // Theme selector UI logic
     const themeSelector = document.getElementById('themeSelector');
     let selectedTheme = 'basic';
-    themeSelector.querySelectorAll('.theme-option').forEach(option => {
+    themeSelector.querySelectorAll('.theme-chip').forEach(option => {
       option.addEventListener('click', function() {
-        themeSelector.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected'));
+        themeSelector.querySelectorAll('.theme-chip').forEach(opt => opt.classList.remove('selected'));
         this.classList.add('selected');
         selectedTheme = this.getAttribute('data-theme');
       });
