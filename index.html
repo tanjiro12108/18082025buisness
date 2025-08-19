@@ -400,16 +400,16 @@
         mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
       setMode(mode);
+
+      // If already signed up, redirect to login page
+      if(localStorage.getItem('user')) {
+        window.location.href = "login.html";
+      }
     });
 
     toggle.addEventListener('change', function() {
       setMode(this.checked ? 'dark' : 'light');
     });
-
-    // If already signed up, redirect to login (or main) page
-    if(localStorage.getItem('user')) {
-      window.location.href = "login.html";
-    }
 
     // Theme selector UI logic
     const themeSelector = document.getElementById('themeSelector');
@@ -464,10 +464,10 @@
       localStorage.setItem('dashboardTheme', selectedTheme);
 
       // Set logged-in flag
-      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('loggedIn', 'false');
 
-      // Redirect to main dashboard
-      window.location.href = "admin-dashboard.html";
+      // Redirect to login page (not dashboard)
+      window.location.href = "login.html";
     });
   </script>
 </body>
